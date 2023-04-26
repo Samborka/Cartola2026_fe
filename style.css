@@ -1,0 +1,92 @@
+/* Definição de fontes */
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
+/* Estilo do corpo da página */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  background-color: #f2f2f2;
+}
+
+/* Estilo do título */
+h1 {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Estilo do formulário de cadastro */
+form {
+  width: 50%;
+  margin: 0 auto;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="number"] {
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+form input[type="submit"] {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Estilo da tabela */
+table {
+  border-collapse: collapse;
+  margin: 20px auto;
+  font-size: 16px;
+}
+
+table th {
+  background-color: #4caf50;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+}
+
+table td {
+  border: 1px solid #4caf50;
+  padding: 10px;
+  text-align: center;
+}
+
+table td form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+table td form input[type="number"] {
+  width: 70px;
+  border: 1px solid black;
+  margin-left: 5px;
+  padding: 5px;
+}
+
+table td form input[type="submit"] {
+  padding: 5px 10px;
+  margin-left: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+table td form input[type="submit"]:hover {
+  background-color: #444;
+}
