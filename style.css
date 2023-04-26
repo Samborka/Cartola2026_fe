@@ -90,3 +90,10 @@ table td form input[type="submit"] {
 table td form input[type="submit"]:hover {
   background-color: #444;
 }
+
+#ranking {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
