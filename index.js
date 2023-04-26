@@ -10,14 +10,17 @@ const table = document.querySelector("#users-table tbody");
 //const updateScore = document.getElementById("update-score");
 
 form.addEventListener("submit", async (event) => {
-  event.preventDefault();
-
   const nameInput = document.getElementById("nome");
   const teamInput = document.getElementById("time");
   console.log(nameInput, teamInput);
 
   const name = nameInput.value;
   const team = teamInput.value;
+
+  if (name === "" || team === "") {
+    alert("Preenche tudo, porra!");
+    return;
+  }
 
   const response = await fetch(
     "https://cartola2026-deploy.onrender.com/users",
