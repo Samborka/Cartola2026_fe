@@ -12,7 +12,6 @@ const table = document.querySelector("#users-table tbody");
 form.addEventListener("submit", async (event) => {
   const nameInput = document.getElementById("nome");
   const teamInput = document.getElementById("time");
-  console.log(nameInput, teamInput);
 
   const name = nameInput.value;
   const team = teamInput.value;
@@ -46,14 +45,14 @@ function updateScorePoints(id, newScore, oldScore) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      score: parseInt(oldScore) + parseInt(newScore),
+      score: parseFloat(oldScore) + parseFloat(newScore),
     }),
   })
     .then((response) => {
       if (response.ok) {
-        console.log("Pontuação atualizada com sucesso!");
+        alert.log("Pontuação atualizada com sucesso!");
       } else {
-        console.error("Erro ao atualizar a pontuação:", response.status);
+        alert("Erro ao atualizar a pontuação:", response.status);
       }
     })
     .catch((error) => {
@@ -103,6 +102,7 @@ async function updateTable() {
       input.type = "number";
       input.id = "novaPontuacao";
       input.name = "novaPontuacao";
+      input.step = "0.01";
       form.appendChild(input);
 
       const submitButton = document.createElement("input");
