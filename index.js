@@ -10,31 +10,35 @@ const table = document.querySelector("#users-table tbody");
 //const updateScore = document.getElementById("update-score");
 
 form.addEventListener("submit", async (event) => {
-  const nameInput = document.getElementById("nome");
-  const teamInput = document.getElementById("time");
+  try {
+    const nameInput = document.getElementById("nome");
+    const teamInput = document.getElementById("time");
 
-  const name = nameInput.value;
-  const team = teamInput.value;
+    const name = nameInput.value;
+    const team = teamInput.value;
 
-  if (name === "" || team === "") {
-    event.preventDefault();
-    alert("Preenche tudo, porra!");
-    return;
-  }
+    if (name === "" || team === "") {
+      event.preventDefault();
+      alert("Preenche tudo, porra!");
+      return;
+    }
 
-  const response = await fetch(
-    "https://cartola2026-deploy.onrender.com/users",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      "https://cartola2026-deploy.onrender.com/users",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, team }),
       },
-      body: JSON.stringify({ name, team }),
-    },
-  );
+    );
 
-  if (response.ok) {
-    alert("Criou o time, seu merda");
+    if (response.ok) {
+      alert("Criou o time, seu merda");
+    }
+  } catch {
+    alert("Deu erro pra criar essa merda");
   }
 });
 
