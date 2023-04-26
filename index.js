@@ -1,6 +1,6 @@
 let users;
 async function getUsers() {
-  const response = await fetch("http://localhost:3001/users");
+  const response = await fetch("https://cartola2026-deploy.onrender.com/users");
 
   users = await response.json();
 }
@@ -19,13 +19,16 @@ form.addEventListener("submit", async (event) => {
   const name = nameInput.value;
   const team = teamInput.value;
 
-  const response = await fetch("http://localhost:3001/users", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
+  const response = await fetch(
+    "https://cartola2026-deploy.onrender.com/users",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, team }),
     },
-    body: JSON.stringify({ name, team }),
-  });
+  );
 
   if (response.ok) {
     alert("Criou o time, seu merda");
@@ -33,7 +36,7 @@ form.addEventListener("submit", async (event) => {
 });
 
 function updateScorePoints(id, newScore, oldScore) {
-  fetch(`http://localhost:3001/users/${id}`, {
+  fetch(`https://cartola2026-deploy.onrender.com/users/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
