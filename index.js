@@ -7,9 +7,9 @@ async function getUsers() {
 
 const form = document.getElementById("user-form");
 const table = document.querySelector("#users-table tbody");
-//const updateScore = document.getElementById("update-score");
 
 form.addEventListener("submit", async (event) => {
+  event.preventDefault();
   try {
     const nameInput = document.getElementById("nome");
     const teamInput = document.getElementById("time");
@@ -23,45 +23,43 @@ form.addEventListener("submit", async (event) => {
       return;
     }
 
-    const response = await fetch(
-      "https://cartola2026-deploy.onrender.com/users",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, team }),
+    await fetch("https://cartola2026-deploy.onrender.com/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify({ name, team }),
+    });
 
-    if (response.ok) {
-      alert("Criou o time, seu merda");
-    }
+    alert("Criou o time, seu merda");
+    location.reload();
   } catch {
     alert("Deu erro pra criar essa merda");
   }
 });
 
-function updateScorePoints(id, newScore, oldScore) {
-  fetch(`https://cartola2026-deploy.onrender.com/users/${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      score: parseFloat(oldScore) + parseFloat(newScore),
-    }),
-  })
-    .then((response) => {
-      if (response.ok) {
-        alert.log("Pontuação atualizada com sucesso!");
-      } else {
-        alert("Erro ao atualizar a pontuação:", response.status);
-      }
-    })
-    .catch((error) => {
-      console.error("Erro ao atualizar a pontuação:", error);
+async function updateScorePoints(id, newScore, oldScore) {
+  if (newScore === null || newScore === "") {
+    alert("Preencha a pontuação, seu merda!");
+    return;
+  }
+
+  try {
+    await fetch(`https://cartola2026-deploy.onrender.com/users/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        score: parseFloat(oldScore) + parseFloat(newScore),
+      }),
     });
+
+    alert("Pontuação atualizada com sucesso!");
+    location.reload();
+  } catch (error) {
+    alert("Erro ao atualizar a pontuação");
+  }
 }
 
 // Função que atualiza a tabela com os dados dos usuários do banco de dados
@@ -115,6 +113,7 @@ async function updateTable() {
       form.appendChild(submitButton);
       form.setAttribute("id", "update-score");
       form.addEventListener("submit", (event) => {
+        event.preventDefault();
         updateScorePoints(user._id, input.value, user.score);
       });
 
@@ -126,4 +125,3 @@ async function updateTable() {
   } catch {}
 }
 updateTable();
-//Implementar atualizacao de score
