@@ -18,6 +18,7 @@ form.addEventListener("submit", async (event) => {
   const team = teamInput.value;
 
   if (name === "" || team === "") {
+    event.preventDefault();
     alert("Preenche tudo, porra!");
     return;
   }
