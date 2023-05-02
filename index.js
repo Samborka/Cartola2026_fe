@@ -63,16 +63,29 @@ async function updateScorePoints(id, newScore, oldScore) {
 }
 
 // Função que atualiza a tabela com os dados dos usuários do banco de dados
-async function updateTable() {
+async function createTable() {
   // Faz uma requisição HTTP GET para o endpoint /users do servidor
   try {
     // Limpa a tabela atual
     table.innerHTML = "";
     await getUsers();
 
+    // Ordena os usuários pelo score (em ordem decrescente), mas também pela posição em caso de empate
+    users.sort((a, b) => {
+      if (a.score === b.score) {
+        return a.position - b.position;
+      }
+      return b.score - a.score;
+    });
+
     // Adiciona os dados dos usuários na tabela
+    let position = 1;
     users.forEach((user) => {
       const tr = document.createElement("tr");
+
+      const tdPosicao = document.createElement("td");
+      tdPosicao.textContent = position;
+      tr.appendChild(tdPosicao);
 
       const tdNome = document.createElement("td");
       tdNome.textContent = user.name;
@@ -121,7 +134,9 @@ async function updateTable() {
       tr.appendChild(tdAcao);
 
       table.appendChild(tr);
+      position++;
     });
   } catch {}
 }
-updateTable();
+
+createTable();
